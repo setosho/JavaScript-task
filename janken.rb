@@ -1,12 +1,32 @@
+=begin
+
 class Player
   def hand
     # コンソールを入力待ち状態にし、プレイヤーがコンソールから打ち込んだ値を出力する処理のメソッドの処理をこの中に作成する
-    # my_handに入力されたものが0,1,2のいずれかの場合は、インスタンス変数のplayer_handにmy_handを代入する
+    # グーチョキパー(0,1,2)に当てはまる入力だった場合にのみbreakで処理を抜け、my_handを返す
+    # my_handに入力されたものをinclude?でjan_numbersの中を探し、当てはまればtrueを返し、breakで処理を抜ける
+    jan_numbers = (0..2)
+    while true
+      puts("数字を入力してください")
+      puts ("[0]:グー\n[1]:チョキ\n[2]:パー")
+      my_hand = gets.to_i
+      break if jan_numbers.include?(my_hand)
+        puts("数値が正しくありません")
+      end
+       my_hand
+  end
+end
+=end
+
+class Player
+  def hand
+    # コンソールを入力待ち状態にし、プレイヤーがコンソールから打ち込んだ値を出力する処理のメソッドの処理をこの中に作成する
+    # my_handに入力されたものが0,1,2のいずれかの場合は、my_handを返す
       puts("数字を入力してください")
       puts ("[0]:グー\n[1]:チョキ\n[2]:パー")
       my_hand = gets.to_i
       if my_hand ==0 || my_hand == 1 || my_hand == 2
-        player_hand = my_hand
+        my_hand
       else
         puts("数値が正しくありません")
         hand
@@ -22,13 +42,13 @@ class Enemy
 end
 
 class Janken
-  def pon(player_hand, enemy_hand)
+  def pon(my_hand, enemy_hand)
     # プレイヤーが打ち込んだ値と、Enemyがランダムに出した値でじゃんけんをさせ、その結果をコンソール上に出力するメソッドをこの中に作成する
     # その際、あいこもしくはグー、チョキ、パー以外の値入力時には、もう一度ジャンケンをする
     # 相手がグー、チョキ、パーのうち、何を出したのかも表示させる
 
     #勝敗の処理
-    match = (player_hand - enemy_hand + 3) % 3
+    match = (my_hand - enemy_hand + 3) % 3
 
     if match == 0
       result = "あいこ（´・ω・｀）"
